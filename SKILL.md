@@ -1,5 +1,5 @@
 ---
-name: ai-image-stripper
+name: image-metadata-cleaner
 description: "Clean privacy-sensitive metadata from user-owned images by writing sanitized copies. Use only when the user explicitly asks to remove image metadata for privacy, publishing hygiene, or file-size cleanup. Do not use to hide AI authorship, evade provenance checks, bypass platform labels, or misrepresent an image's origin."
 license: MIT-0
 metadata:
@@ -8,9 +8,9 @@ metadata:
   reviewed-for: "Claude Code Skills safety and quality"
 ---
 
-# AIwork4me/ai-image-stripper
+# AIwork4me/image-metadata-cleaner
 
-`ai-image-stripper` cleans privacy-sensitive metadata from user-owned image
+`image-metadata-cleaner` cleans privacy-sensitive metadata from user-owned image
 files by writing separate sanitized copies. This skill is for privacy hygiene
 and reproducible file preparation, not for hiding authorship, evading provenance
 checks, bypassing platform labels, or misrepresenting where an image came from.
