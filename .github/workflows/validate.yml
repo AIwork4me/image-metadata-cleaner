@@ -4,6 +4,9 @@ on:
   push:
   pull_request:
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
   validate:
     runs-on: ubuntu-latest
@@ -27,4 +30,4 @@ jobs:
         run: uv run --with pillow==12.2.0 python -m py_compile scripts/strip.py tests/test_strip.py
 
       - name: Validate Claude skill structure
-        run: uvx --from skills-ref agentskills validate .
+        run: uvx --from skills-ref agentskills validate "$PWD"
