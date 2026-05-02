@@ -56,6 +56,19 @@ class StripScriptTest(unittest.TestCase):
 
             self.assertEqual(exit_code, 1)
 
+    def test_explicit_output_extension_controls_preserve_format(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir)
+            src = root / "source.png"
+            dest = root / "clean.jpg"
+            Image.new("RGB", (12, 8), (10, 20, 30)).save(src)
+
+            exit_code = self.run_main([str(src), "--output", str(dest)])
+
+            self.assertEqual(exit_code, 0)
+            with Image.open(dest) as image:
+                self.assertEqual(image.format, "JPEG")
+
     def test_folder_rerun_does_not_process_output_folder(self) -> None:
         with tempfile.TemporaryDirectory() as temp_dir:
             root = Path(temp_dir)

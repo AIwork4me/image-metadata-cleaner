@@ -65,6 +65,15 @@ def format_for_source(src: Path, requested: str) -> tuple[str, str]:
     return "PNG", ".png"
 
 
+def format_for_output_suffix(path: Path) -> tuple[str, str] | None:
+    suffix = path.suffix.lower()
+    if suffix in {".jpg", ".jpeg"}:
+        return "JPEG", ".jpg"
+    if suffix == ".png":
+        return "PNG", ".png"
+    return None
+
+
 def is_relative_to(path: Path, parent: Path) -> bool:
     try:
         path.resolve().relative_to(parent.resolve())
@@ -111,6 +120,10 @@ def resolve_output(
         dest = Path(output)
         if dest.exists() and dest.is_dir():
             dest = dest / f"{src.stem}-clean{ext}"
+        elif fmt == "preserve":
+            explicit_format = format_for_output_suffix(dest)
+            if explicit_format is not None:
+                output_format, ext = explicit_format
     else:
         root = Path(output_dir) if output_dir else src.parent
         if batch and output_dir is None:

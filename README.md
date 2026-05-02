@@ -1,5 +1,7 @@
 # AIwork4me/image-metadata-cleaner
 
+[![Validate skill](https://github.com/AIwork4me/image-metadata-cleaner/actions/workflows/validate.yml/badge.svg)](https://github.com/AIwork4me/image-metadata-cleaner/actions/workflows/validate.yml)
+
 `image-metadata-cleaner` cleans privacy-sensitive metadata from user-owned
 images by writing sanitized copies. The skill is designed for legitimate privacy
 hygiene, file preparation, and reproducible publishing workflows.

@@ -1,0 +1,30 @@
+name: Validate skill
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v5
+
+      - name: Run unit tests
+        run: uv run --with pillow==12.2.0 python -m unittest discover -s tests
+
+      - name: Compile Python files
+        run: uv run --with pillow==12.2.0 python -m py_compile scripts/strip.py tests/test_strip.py
+
+      - name: Validate Claude skill structure
+        run: uvx --from skills-ref agentskills validate .

@@ -44,6 +44,8 @@ Default format is `preserve`:
 
 - JPEG inputs are written as JPEG.
 - Other supported inputs are written as PNG.
+- Explicit `--output` paths ending in `.jpg`, `.jpeg`, or `.png` are respected
+  when `--format preserve` is used.
 
 Folder input writes outputs to `metadata-cleaned/` by default. Single-file input
 writes a sibling copy such as `photo-clean.png` or `photo-clean.jpg`. Explicit

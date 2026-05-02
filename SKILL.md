@@ -67,9 +67,11 @@ uv run --with pillow==12.2.0 python "${CLAUDE_SKILL_DIR}/scripts/strip.py" "<fol
 ```
 
 Output format defaults to `preserve`: JPEG inputs stay JPEG, and other supported
-formats are written as PNG to avoid unexpected lossy conversion. Use
-`--format jpg` only when the user explicitly wants JPEG output; transparent
-images will be composited onto a white background.
+formats are written as PNG to avoid unexpected lossy conversion. If the user
+provides an explicit `--output` path ending in `.jpg`, `.jpeg`, or `.png`, the
+script follows that extension unless `--format` is set. Use `--format jpg` only
+when the user explicitly wants JPEG output; transparent images will be
+composited onto a white background.
 
 ## After running
 
