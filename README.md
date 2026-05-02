@@ -1,8 +1,8 @@
-# Image Metadata Cleaner
+# AIwork4me/ai-image-stripper
 
-Clean privacy-sensitive metadata from user-owned images by writing sanitized
-copies. The skill is designed for legitimate privacy hygiene, file preparation,
-and reproducible publishing workflows.
+`ai-image-stripper` cleans privacy-sensitive metadata from user-owned images by
+writing sanitized copies. The skill is designed for legitimate privacy hygiene,
+file preparation, and reproducible publishing workflows.
 
 It is not designed or documented for hiding authorship, evading provenance
 checks, bypassing AI labels, or misrepresenting an image's origin.
@@ -29,8 +29,9 @@ cp -r ai-image-stripper ~/.claude/skills/
 cp -r ai-image-stripper your-project/.claude/skills/
 ```
 
-The skill name exposed to Claude is `ai-image-stripper`, matching the repository
-directory for official skill validation.
+The skill name exposed to Claude is `ai-image-stripper`, matching the
+`AIwork4me/ai-image-stripper` repository and installation directory for official
+skill validation.
 
 ## Use in Claude Code
 

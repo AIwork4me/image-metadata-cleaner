@@ -8,12 +8,12 @@ metadata:
   reviewed-for: "Claude Code Skills safety and quality"
 ---
 
-# Image Metadata Cleaner
+# AIwork4me/ai-image-stripper
 
-Clean privacy-sensitive metadata from user-owned image files by writing separate
-sanitized copies. This skill is for privacy hygiene and reproducible file
-preparation, not for hiding authorship, evading provenance checks, bypassing
-platform labels, or misrepresenting where an image came from.
+`ai-image-stripper` cleans privacy-sensitive metadata from user-owned image
+files by writing separate sanitized copies. This skill is for privacy hygiene
+and reproducible file preparation, not for hiding authorship, evading provenance
+checks, bypassing platform labels, or misrepresenting where an image came from.
 
 ## Safety boundary
 
