@@ -1,57 +1,93 @@
-# AI Image Stripper
+# Image Metadata Cleaner
 
-**Strip invisible AI-generation metadata from images. One command.**
+Clean privacy-sensitive metadata from user-owned images by writing sanitized
+copies. The skill is designed for legitimate privacy hygiene, file preparation,
+and reproducible publishing workflows.
 
-ChatGPT, DALL-E, and Gemini embed hidden C2PA metadata in every image they generate. LinkedIn, Xiaohongshu, and other platforms read this to auto-label your content as "AI-generated." This skill removes it.
+It is not designed or documented for hiding authorship, evading provenance
+checks, bypassing AI labels, or misrepresenting an image's origin.
 
-```
-Input:  ChatGPT-generated PNG (1.5MB, 23KB C2PA certificate inside)
-Output: Clean JPG (380KB, zero metadata, same resolution)
-```
+## What it does
+
+- Re-encodes image pixels into a fresh output file.
+- Writes copies instead of modifying originals in place.
+- Defaults folder output to `metadata-cleaned/`.
+- Refuses output paths that resolve to the same file as the input.
+- Produces a human-readable summary and optional JSON manifest.
+- Reopens outputs and scans for common metadata keys and provenance marker
+  strings.
 
 ## Install
 
 Copy this folder to your Claude Code skills directory:
 
 ```bash
-# Global (all projects)
+# Global, all projects
 cp -r ai-image-stripper ~/.claude/skills/
 
 # Or project-level only
 cp -r ai-image-stripper your-project/.claude/skills/
 ```
 
-Or install via ClawHub:
-
-```bash
-clawhub install ai-image-stripper
-```
+The skill name exposed to Claude is `ai-image-stripper`, matching the repository
+directory for official skill validation.
 
 ## Use in Claude Code
 
-Just say:
+Ask for privacy metadata cleanup of images you own or are authorized to process:
 
-> "Strip AI metadata from my Downloads folder"
+> Clean privacy metadata from this folder of product images.
 
 Or invoke directly:
 
-> /ai-image-stripper /path/to/folder
+> /ai-image-stripper /path/to/folder --manifest
 
-## What it removes
+## CLI examples
 
-C2PA provenance certificates, JUMBF containers, EXIF, XMP, IPTC, ICC profiles — everything. The output is a fresh image with pixel data only.
+Preview planned outputs:
 
-## Features
+```bash
+uv run --with pillow==12.2.0 python scripts/strip.py /path/to/images --dry-run
+```
 
-- Batch processing — all images in a folder at once
-- Multiple input formats — PNG, JPEG, WebP, BMP, TIFF
-- Output as JPG (default) or PNG (lossless)
-- Resolution preserved exactly
-- Skips files that already exist (safe to re-run)
+Clean one file and write `photo-clean.png` or `photo-clean.jpg` beside it:
 
-## Technical details
+```bash
+uv run --with pillow==12.2.0 python scripts/strip.py /path/to/photo.png --manifest
+```
 
-See [references/technical-details.md](references/technical-details.md).
+Clean a folder into `/path/to/images/metadata-cleaned/`:
+
+```bash
+uv run --with pillow==12.2.0 python scripts/strip.py /path/to/images --manifest
+```
+
+Choose JPEG output explicitly:
+
+```bash
+uv run --with pillow==12.2.0 python scripts/strip.py /path/to/images --format jpg
+```
+
+## Supported inputs
+
+`.png`, `.jpg`, `.jpeg`, `.webp`, `.bmp`, `.tiff`, `.tif`
+
+## Verification scope
+
+The script verifies that common metadata keys and common C2PA/JUMBF marker
+strings are not visible in the output file. This is a practical hygiene check,
+not a cryptographic guarantee.
+
+It does not remove pixel-level watermarks, image fingerprints, external platform
+records, or any provenance signal outside the image file itself.
+
+## Development
+
+Run tests:
+
+```bash
+uv run --with pillow==12.2.0 python -m unittest discover -s tests
+```
 
 ## License
 
